@@ -12,13 +12,13 @@ The platform is deployed using an interactive **Streamlit dashboard** and suppor
 
 ## ✨ Key Features
 
-- 🔍 Credit Risk Prediction using Machine Learning
-- 📊 Default Probability Estimation
-- 🏷️ Risk Categorization (Low / Medium / High)
-- 🌐 Interactive Streamlit Web Interface
-- ⚡ Real-time Prediction System
-- 🧠 Financial Decision Support System
-- 🐳 Dockerized Deployment Support
+- 🔍 Credit Risk Prediction using Machine Learning  
+- 📊 Default Probability Estimation  
+- 🏷️ Risk Categorization (Low / Medium / High)  
+- 🌐 Interactive Streamlit Web Interface  
+- ⚡ Real-time Prediction System  
+- 🧠 Financial Decision Support System  
+- 🐳 Dockerized Deployment Support  
 
 ---
 
@@ -26,22 +26,22 @@ The platform is deployed using an interactive **Streamlit dashboard** and suppor
 
 Financial institutions need a reliable system to assess loan default risk before approving credit applications.
 
-This project predicts credit risk based on:
+This system predicts credit risk based on:
 
-- Applicant financial stability
-- Credit history behavior
-- Income level
-- Loan amount requested
-- Employment details
+- Applicant financial stability  
+- Credit history behavior  
+- Income level  
+- Loan amount requested  
+- Employment details  
 
-The system provides a **probabilistic risk score** to support lending decisions.
+It provides a probabilistic risk score to support lending decisions.
 
 ---
 
 ## 🤖 Machine Learning Model
 
 ### Algorithm Used
-- XGBoost Classifier
+- XGBoost Classifier  
 
 ---
 
@@ -61,9 +61,9 @@ The system provides a **probabilistic risk score** to support lending decisions.
 
 ### 🎯 Output
 
-- Default Probability
-- Risk Category (Low / Medium / High)
-- Lending Recommendation
+- Default Probability  
+- Risk Category (Low / Medium / High)  
+- Lending Recommendation  
 
 ---
 
@@ -82,35 +82,22 @@ The system provides a **probabilistic risk score** to support lending decisions.
 This system ensures **responsible lending practices** by not rejecting applicants solely based on risk score.
 
 Instead, high-risk cases are:
-
-- Reviewed manually
-- Evaluated for additional financial context
-- Considered for collateral or guarantor-based approval
+- Reviewed manually  
+- Evaluated for additional financial context  
+- Considered for collateral or guarantor-based approval  
 
 ---
 
 ## 🛠️ Tech Stack
 
-### Programming Language
-- Python
-
-### Machine Learning
-- XGBoost
-- Scikit-Learn
-- Pandas
-- NumPy
-
-### Frontend
-- Streamlit
-
-### Deployment
-- Docker
+**Programming Language:** Python  
+**Machine Learning:** XGBoost, Scikit-Learn, Pandas, NumPy  
+**Frontend:** Streamlit  
+**Deployment:** Docker  
 
 ---
 
 ## 📁 Project Structure
-
-```text
 CREDIT_RISK_PLATFORM/
 │
 ├── data/
@@ -119,13 +106,26 @@ CREDIT_RISK_PLATFORM/
 ├── notebooks/
 ├── sql/
 ├── src/
-│   ├── ml/
-│   ├── ui/
-│   ├── explainability/
-│   ├── rules/
-│   ├── utils/
+│ ├── ml/
+│ ├── ui/
+│ ├── explainability/
+│ ├── rules/
+│ ├── utils/
 │
 ├── Dockerfile
 ├── docker-compose.yml
 ├── requirements.txt
 └── README.md
+
+
+---
+
+## 🚀 Next Steps
+
+- Add model performance metrics (AUC, F1-score)  
+- Deploy Streamlit app on cloud (Render / AWS / HuggingFace)  
+- Add SHAP explainability visuals  
+- Improve UI with charts and graphs  
+- Add authentication system  
+
+---
