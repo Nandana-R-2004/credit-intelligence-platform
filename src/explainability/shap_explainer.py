@@ -4,47 +4,50 @@ import shap
 import matplotlib.pyplot as plt
 import os
 
-def shap_explain():
+BASE_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), "../.."))
 
-    # -----------------------------
-    # FIX BASE PATH (IMPORTANT)
-    # -----------------------------
-    BASE_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), "../.."))
+model_path = os.path.join(BASE_DIR, "models", "credit_risk_model.pkl")
+data_path = os.path.join(BASE_DIR, "data", "processed_train.csv")
 
-    model_path = os.path.join(BASE_DIR, "models", "credit_risk_model.pkl")
-    data_path = os.path.join(BASE_DIR, "data", "processed_train.csv")
+print("Loading model...")
+model = joblib.load(model_path)
 
-    print("Loading model and data...")
+print("Loading data...")
+df = pd.read_csv(data_path)
 
-    model = joblib.load(model_path)
-    df = pd.read_csv(data_path)
+# Create same features used during training
+df["AGE"] = abs(df["DAYS_BIRTH"]) / 365
 
-    X = df.drop(columns=["TARGET"])
+df["YEARS_EMPLOYED"] = df["DAYS_EMPLOYED"].apply(
+    lambda x: abs(x) / 365 if x < 0 else 0
+)
 
-    print("Creating SHAP explainer...")
+features = [
+    "EXT_SOURCE_1",
+    "EXT_SOURCE_2",
+    "EXT_SOURCE_3",
+    "AMT_INCOME_TOTAL",
+    "AMT_CREDIT",
+    "AGE",
+    "YEARS_EMPLOYED"
+]
 
-    explainer = shap.TreeExplainer(model)
-    shap_values = explainer.shap_values(X)
+# Take only 100 rows
+X = df[features].sample(100, random_state=42)
 
-    # -----------------------------
-    # GLOBAL EXPLANATION
-    # -----------------------------
-    shap.summary_plot(shap_values, X)
+print("Creating SHAP explainer...")
+explainer = shap.TreeExplainer(model)
 
-    # -----------------------------
-    # SINGLE PREDICTION
-    # -----------------------------
-    print("Explaining first prediction...")
+print("Calculating SHAP values...")
+shap_values = explainer.shap_values(X)
 
-    shap.force_plot(
-        explainer.expected_value,
-        shap_values[0],
-        X.iloc[0],
-        matplotlib=True
-    )
+print("Generating summary plot...")
 
-    plt.show()
+plt.figure(figsize=(10, 6))
+shap.summary_plot(shap_values, X, show=False)
 
+save_path = os.path.join(BASE_DIR, "models", "shap_summary.png")
+plt.savefig(save_path, bbox_inches="tight")
+plt.close()
 
-if __name__ == "__main__":
-    shap_explain()
+print(f"SHAP figure saved at: {save_path}")
